@@ -68,3 +68,28 @@ setTimeout(() => {console.log('3 seconds has elapsed');},
 
 using arrow functions are becoming popular, and this [link](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) provides all teh use cases of arrow functions.
 
+### Making Decisions with JavaScript
+this sections explains about boolean expressions and conditional statements.
+new things for me was a comparison operator '==' adn '==='. '==' is used to compare the values, and '===' is used to compare the values and the data types.
+`==` (Double Equals): This is the loose equality operator and it performs type coercion before comparing. This means that if you compare two values of different types, JavaScript will try to convert one or both of them to a common type before making the comparison.
+
+For example, when comparing a string to a number, the string is converted to a number:
+`console.log(1 == "1");  // Outputs: true`
+
+`===` (Triple Equals): This is the strict equality operator and it does not perform type coercion. This means that it will only return true if both the value and the type are the same.
+For example, when comparing a string to a number, no type conversion is performed:
+`console.log(1 === "1");  // Outputs: false`
+
+other things are quite similar to other programming languages. if statements, if else and switch statements.Ternary expressions were quite new for me. it is a short way to write if else statements.
+for example:
+```javascript   
+let isRaining = true;
+isRaining ? console.log('You need a rain coat.') : console.log('No need for a rain coat.');
+``` 
+there was a link to MDN documentation for [expressions and operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators#expressions_and_operators_by_category), which i found useful.
+
+
+### Arrays and Loops
+this section explains about the arrays and loops in Javascript. there was nothing new for me in this section. it was quite similar to other programming languages.
+there was an exercie to rewrite the loop with `foreach`method, `for of` loop and `map` method. it was quite useful to understand the difference between them. i rwrite the simple code in the [js-testing.js](./js-testing.js) file.
+
