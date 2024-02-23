@@ -13,3 +13,7 @@ there we have created the basic html structure for our terrarium.
 there was an interesting [video](https://youtu.be/OUDV1gqs9GA) shows how screen readers are used and hte importance oof accessibility in the html code.
 
 and there was a link to the deprecated html tags and elements [here](https://developer.mozilla.org/en-US/docs/Web/HTML/Element#obsolete_and_deprecated_elements)
+
+## 2. intro to css
+this section was about the css and how to style the terrarium. there were a lot of elements and properties used in the css file. there are a lot of properties that can be used for the css selectors. 
+
