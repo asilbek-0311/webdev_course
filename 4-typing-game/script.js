@@ -33,9 +33,11 @@ document.getElementById('start').addEventListener('click', function() {
 
     const spanWords = words.map(function(word) { return `<span>${word}</span>` });
     //convert into a string and set as innerHTML on quote display
+    console.log(spanWords);
     quoteElement.innerHTML = spanWords.join(' ');
+    console.log(quoteElement);
     //highlight the first word
-    quoteElement.childNodes[0].className = 'highlight';
+    quoteElement.children[0].className = 'highlight';
     //clear any prior status messages
     messageElement.innerText = '';
 
@@ -57,7 +59,7 @@ inputElement.addEventListener('input', () => {
     //get the current value
     const typedValue = inputElement.value;
 
-    if(typedValue === currentWord && wordIndex === words.length -1){
+    if(typedValue === currentWord && wordIndex === words.length-1){
         //end of quote
         //display success
         const elapsedTime = new Date().getTime() - startTime;
@@ -70,12 +72,17 @@ inputElement.addEventListener('input', () => {
         //move to the next word
         wordIndex++;
 
-        //reset the class name for all elements in quote
-        for(const wordElement of quoteElement.childNodes){
+        // reset the class name for all elements in quote
+        for(const wordElement of quoteElement.children){
             wordElement.className = '';
         }
         //highlight the new word
-        quoteElement.childNodes[wordIndex].className = 'highlight';
+        quoteElement.children[wordIndex].className = 'highlight';
+
+        console.log('current word', currentWord);
+        console.log('typed value', typedValue);
+        console.log('word index', wordIndex);
+        console.log('quote element child node:', quoteElement.children[wordIndex]);
     }
     else if(currentWord.startsWith(typedValue)){
         //currently correct
@@ -86,5 +93,7 @@ inputElement.addEventListener('input', () => {
         //error state
         inputElement.className = 'error';
     }
+    //highlight the new word
+    // quoteElement.childNodes[wordIndex].className = 'highlight';
 
 });
