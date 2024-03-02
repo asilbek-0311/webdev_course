@@ -9,11 +9,24 @@
     <h1>Typing Game</h1>
     <p> Practice your typing skills with the quotes from Sherlock Holmes. Click **start** to begin!</p>
     <p id="quoteDisplay"></p>
-    <p id="statusMessage"></p>
-    <div>
-        <input type="text" aria-label="current word" id="typedValue"/>
+
+    <div class="button-start">   
         <button type="button" id="start">Start</button>
     </div>
+    
+    <div class="input-area">
+        <input type="text" aria-label="current word" id="typedValue" disabled/>
+    </div>
+    
+
+    <div id="statusBox" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p id="statusMessage"></p>
+        </div>
+      </div>
+    <div>
+
     <script src="script.js"></script>
 </body>
 </html>

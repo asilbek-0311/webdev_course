@@ -50,6 +50,9 @@ document.getElementById('start').addEventListener('click', function() {
 
     //start the timer
     startTime = new Date().getTime();
+
+    //enable the input textbox
+    inputElement.disabled = false;
 });
 
 //event handler for input element
@@ -65,6 +68,9 @@ inputElement.addEventListener('input', () => {
         const elapsedTime = new Date().getTime() - startTime;
         const message = `CONGRATULATIONS! You finished in ${elapsedTime / 1000} seconds.`;
         messageElement.innerText = message;
+        inputElement.removeEventListener('input', () => {}); //remove the event handler
+        inputElement.disabled = true; //disable the input box
+        displayModal();
     }
     else if(typedValue.endsWith(' ') && typedValue.trim() === currentWord){
         //end of the word
@@ -93,7 +99,67 @@ inputElement.addEventListener('input', () => {
         //error state
         inputElement.className = 'error';
     }
-    //highlight the new word
-    // quoteElement.childNodes[wordIndex].className = 'highlight';
 
 });
+
+//modal box handling
+function displayModal() {
+    // Get the modal
+    const modal = document.getElementById("statusBox");
+
+    // Get the <span> element that closes the modal
+    const span = document.getElementsByClassName("close")[0];
+
+    // Display the modal
+    modal.style.display = "block";
+
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    };
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+        if (event.target === modal) {
+            modal.style.display = "none";
+        }
+    };
+}
+
+// Function to save high score
+function saveHighScore(score) {
+    // Check if localStorage is supported by the browser
+    if (typeof(Storage) !== "undefined") {
+        // Retrieve existing high scores or initialize an empty array
+        let highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+
+        // Add the new score to the array
+        highScores.push(score);
+
+        // Sort the high scores in descending order
+        highScores.sort((a, b) => b - a);
+
+        // Limit the number of high scores to 10
+        highScores = highScores.slice(0, 10);
+
+        // Save the updated high scores back to localStorage
+        localStorage.setItem("highScores", JSON.stringify(highScores));
+    } else {
+        // If localStorage is not supported, display an error message
+        console.error("localStorage is not supported by your browser.");
+    }
+}
+
+// Function to retrieve high scores
+function getHighScores() {
+    // Check if localStorage is supported by the browser
+    if (typeof(Storage) !== "undefined") {
+        // Retrieve high scores from localStorage
+        const highScores = JSON.parse(localStorage.getItem("highScores")) || [];
+        return highScores;
+    } else {
+        // If localStorage is not supported, display an error message
+        console.error("localStorage is not supported by your browser.");
+        return [];
+    }
+}
