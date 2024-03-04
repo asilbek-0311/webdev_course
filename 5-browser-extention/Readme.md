@@ -12,3 +12,10 @@ This module has three sections:
 3. Background tasks and Performance
 
 ## How Browsers Work
+---
+
+time: 5 march 2024, 2:30 am
+
+i have built the extension followingt eh steps given on the instruction. but I am facing some problems rn. When i try to run npm run build, it gives me an error. I will fix them tomorrow.
+Also i need to really understand about local storage and how ti is used. how to upload the extension to teh browser ad how to test it locally.
+i still do not know about npm and node propely. I will learn about them as well.
