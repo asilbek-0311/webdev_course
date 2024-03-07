@@ -31,6 +31,22 @@ const fossilfuel = document.querySelector('.fossil-fuel');
 const myregion = document.querySelector('.my-region');
 const clearBtn = document.querySelector('.clear-btn');
 
+function calculateColor(value) {
+	let co2Scale = [0, 150, 600, 750, 800];
+	let colors = ['#2AA364', '#F5EB4D', '#9E4229', '#381D02', '#381D02'];
+
+	let closestNum = co2Scale.sort((a, b) => {
+		return Math.abs(a - value) - Math.abs(b - value);
+	})[0];
+	console.log(value + ' is closest to ' + closestNum);
+	let num = (element) => element > closestNum;
+	let scaleIndex = co2Scale.findIndex(num);
+
+	let closestColor = colors[scaleIndex];
+	console.log(scaleIndex, closestColor);
+
+	chrome.runtime.sendMessage({ action: 'updateIcon', value: { color: closestColor } });
+}
 
 async function displayCarbonUsage(apiKey, region) {
     try {
@@ -47,6 +63,8 @@ async function displayCarbonUsage(apiKey, region) {
             let CO2 = Math.floor(response.data.data.carbonIntensity);
 
             //calculate color based on CO2
+            calculateColor(CO2);
+
             loading.style.display = 'none';
             form.style.display = 'none';
             myregion.textContent = region;
@@ -81,6 +99,13 @@ function init() {
 	const storedRegion = localStorage.getItem('region');
 
     //set icon to be generic green
+    chrome.runtime.sendMessage({
+        action: 'updateIcon',
+            value: {
+                color: 'green',
+            },
+    });
+    
 	//todo
 
     if (storedApiKey === null || storedRegion === null) {
@@ -97,6 +122,8 @@ function init() {
 		form.style.display = 'none';
 		clearBtn.style.display = 'block';
 	}
+
+    
 }
 
 function reset(e) {
@@ -112,7 +139,9 @@ function handleSubmit(e) {
 }
 
 
+
 form.addEventListener('submit', (e) => handleSubmit(e));
 clearBtn.addEventListener('click', (e) => reset(e));
+
 
 init();
